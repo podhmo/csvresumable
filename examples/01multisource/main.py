@@ -12,7 +12,7 @@ def iterate():
 
 
 logging.basicConfig(level=logging.DEBUG)
-itr = csvresumable.Resumable(iterate(), "history.csv")
+itr = csvresumable.iterate(iterate())
 for gid, rows in itertools.islice(itr, 2):
     print(json.dumps({"gid": gid, "rows": list(rows)}))
 print("----")

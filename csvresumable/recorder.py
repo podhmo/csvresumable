@@ -4,6 +4,7 @@ import os.path
 import csv
 import tempfile
 from .langhelpers import reify
+from .name import get_identity
 
 logger = get_logger(__name__)
 
@@ -11,11 +12,9 @@ logger = get_logger(__name__)
 class Recorder:
     writer_factory = csv.writer
 
-    def __init__(self, iterator, *, writename, key, dir=".", register=atexit.register):
-        self.iterator = iterator
-        self.writename = writename
+    def __init__(self, *, name=None, dir=".", register=atexit.register):
+        self.name = name or get_identity()
         self.register = register
-        self.key = key
         self.dir = dir
         self._wf = None
 
@@ -26,20 +25,15 @@ class Recorder:
         self.register(self.finalize)
         return self.writer_factory(self._wf)
 
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        row = next(self.iterator)
-        self.writer.writerow([self.key(row)])
-        return row
+    def record(self, row):
+        self.writer.writerow(row)
 
     def finalize(self):
         if self._wf is None:
             return
         self._wf.close()
-        dirpath = os.path.dirname(self.writename)
+        dirpath = os.path.dirname(self.name)
         if dirpath:
             os.makedirs(dirpath, exist_ok=True)
-        logger.debug("rename file %s -> %s", self._wf.name, self.writename)
-        os.rename(self._wf.name, self.writename)
+        logger.debug("rename file %s -> %s", self._wf.name, self.name)
+        os.rename(self._wf.name, self.name)
