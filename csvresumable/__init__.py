@@ -28,7 +28,7 @@ class _DictReaderWrapper:
 
 def iterate(iterator, *, writename=None, resume=None, key=None, dir=TMP_DIR):
     recorder = Recorder(name=writename, dir=dir)
-    key = key or (lambda x: x)
+    key = key or (lambda x: x[0])
     return Loader(iterator, recorder=recorder, resume=resume, key=key)
 
 
