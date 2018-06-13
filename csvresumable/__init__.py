@@ -3,6 +3,7 @@ import csv
 import itertools
 from csvresumable.loader import Loader
 from csvresumable.recorder import Recorder
+from csvresumable.capture import capture  # noqa
 
 
 def DictReader(f, writename=None, resume=None, key=None, dir=".", *args, **kwargs):

@@ -2,9 +2,8 @@ import os
 import csv
 import itertools
 from logging import getLogger as get_logger
-
+from .consts import RESUME_DEFAULT
 logger = get_logger(__name__)
-RESUME_DEFAULT = bool(os.environ.get("RESUME", ""))
 
 
 class Loader:
