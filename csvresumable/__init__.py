@@ -14,7 +14,7 @@ def get_writename(filename, *, dir="."):
     return os.path.join(dir, ".resumable-{}".format(os.path.basename(filename)))
 
 
-def DictReader(f, writename=None, resume=None, key=None, dir=None, *args, **kwargs):
+def DictReader(f, writename=None, resume=None, key=None, dir=".", *args, **kwargs):
     name = writename or get_writename(getattr(f, "name", None) or "unknown-{!r}".format(f))
     reader = csv.DictReader(f, *args, **kwargs)
     key = key or operator.itemgetter(reader.fieldnames[0])
