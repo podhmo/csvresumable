@@ -2,7 +2,7 @@ import itertools
 from csvresumable import capture, DictReader
 import logging
 
-print("-")
+import sys; sys.stderr.write("----------------------------------------\n")
 logging.basicConfig(level=logging.DEBUG)
 with capture():
     with open("data.csv") as rf:

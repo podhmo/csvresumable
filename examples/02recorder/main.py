@@ -8,6 +8,7 @@ def iterate():
 
 
 if __name__ == "__main__":
+    import sys; sys.stderr.write("----------------------------------------\n")
     import logging
     logging.basicConfig(level=logging.DEBUG)
     for row in Loader(iterate(), Recorder(), key=lambda x: x):
