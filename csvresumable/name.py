@@ -1,21 +1,28 @@
 import os.path
 import sys
 import hashlib
+from .consts import CACHE_DIR
 
 
 def get_identity(
-    argv=None, prefix=".resumable-", suffix=".csv", encoding="utf-8", hasher=hashlib.sha1
+    argv=None,
+    prefix=CACHE_DIR if CACHE_DIR.endswith("/") else CACHE_DIR + "/",
+    suffix=".csv",
+    encoding="utf-8",
+    hasher=hashlib.sha1,
 ):
     """
     get_identity('main')
-    '.resumable-f58ccb5f55e806673664c8e5c56515d07790df41.csv'
+    '~/.cache/py-resumable/f58ccb5f55e806673664c8e5c56515d07790df41.csv'
     """
     if argv is None:
         argv = sys.argv
         if len(argv) > 0:
             argv = os.path.abspath(argv[0])
+
     sha1 = hasher("@".join(argv).encode(encoding))
-    return "{}{}{}".format(prefix, sha1.hexdigest(), suffix)
+    identity = "{}{}{}".format(prefix, sha1.hexdigest(), suffix)
+    return identity
 
 
 def with_decoration(filepath, *, prefix):

@@ -4,7 +4,10 @@ import tempfile
 import contextlib
 from logging import getLogger as get_logger
 from .name import get_identity
-from .consts import RESUME_DEFAULT
+from .consts import (
+    RESUME_DEFAULT,
+    TMP_DIR,
+)
 
 logger = get_logger(__name__)
 
@@ -34,9 +37,13 @@ class MultiWriter:
 
 
 @contextlib.contextmanager
-def capture(name=None, *, out=sys.stdout, resume=RESUME_DEFAULT, redirect_stdout=True, dir="."):
+def capture(
+    name=None, *, out=sys.stdout, resume=RESUME_DEFAULT, redirect_stdout=True, dir=TMP_DIR
+):
     name = name or get_identity(suffix=".capture")
     try:
+        if not os.path.exists(dir):
+            os.makedirs(dir, exist_ok=True)
         tmpf = tempfile.NamedTemporaryFile("w", dir=dir, delete=False)
         with MultiWriter(tmpf, out) as mwf:
             if resume and os.path.exists(name):

@@ -5,6 +5,7 @@ import csv
 import tempfile
 from .langhelpers import reify
 from .name import get_identity
+from .consts import TMP_DIR
 
 logger = get_logger(__name__)
 
@@ -12,7 +13,7 @@ logger = get_logger(__name__)
 class Recorder:
     writer_factory = csv.writer
 
-    def __init__(self, *, name=None, dir=".", register=atexit.register):
+    def __init__(self, *, name=None, dir=TMP_DIR, register=atexit.register):
         self.name = name or get_identity()
         self.register = register
         self.dir = dir
@@ -20,6 +21,8 @@ class Recorder:
 
     @reify
     def writer(self):
+        if not os.path.exists(self.dir):
+            os.makedirs(self.dir, exist_ok=True)
         self._wf = tempfile.NamedTemporaryFile("w", delete=False, dir=self.dir)
         logger.debug("create temporary file %s", self._wf.name)
         self.register(self.finalize)

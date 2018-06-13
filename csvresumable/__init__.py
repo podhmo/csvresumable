@@ -4,16 +4,17 @@ import itertools
 from csvresumable.loader import Loader
 from csvresumable.recorder import Recorder
 from csvresumable.capture import capture  # noqa
+from csvresumable.consts import TMP_DIR
 
 
-def DictReader(f, writename=None, resume=None, key=None, dir=".", *args, **kwargs):
+def DictReader(f, writename=None, resume=None, key=None, dir=TMP_DIR, *args, **kwargs):
     reader = csv.DictReader(f, *args, **kwargs)
     recorder = Recorder(name=writename, dir=dir)
     return _DictReaderWrapper(reader, recorder=recorder, resume=resume, key=key)
 
 
 class _DictReaderWrapper:
-    def __init__(self, reader, *, recorder, resume=None, key=None, dir="."):
+    def __init__(self, reader, *, recorder, resume=None, key=None, dir=TMP_DIR):
         self.reader = reader
         self.key = key or operator.itemgetter(reader.fieldnames[0])
         self.loader = Loader(self.reader, recorder, key=self.key, resume=resume)
@@ -25,7 +26,7 @@ class _DictReaderWrapper:
         return iter(self.loader)
 
 
-def iterate(iterator, *, writename=None, resume=None, key=None, dir="."):
+def iterate(iterator, *, writename=None, resume=None, key=None, dir=TMP_DIR):
     recorder = Recorder(name=writename, dir=dir)
     key = key or (lambda x: x)
     return Loader(iterator, recorder=recorder, resume=resume, key=key)
