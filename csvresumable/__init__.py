@@ -14,7 +14,7 @@ def DictReader(f, writename=None, resume=None, key=None, dir=TMP_DIR, *args, **k
 
 
 class _DictReaderWrapper:
-    def __init__(self, reader, *, recorder, resume=None, key=None, dir=TMP_DIR):
+    def __init__(self, reader, *, recorder, resume=None, key=None):
         self.reader = reader
         self.key = key or operator.itemgetter(reader.fieldnames[0])
         self.loader = Loader(self.reader, recorder, key=self.key, resume=resume)
