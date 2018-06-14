@@ -10,16 +10,18 @@ def get_identity(
     suffix=".csv",
     encoding="utf-8",
     hasher=hashlib.sha1,
+    extra=None,
 ):
     """
     get_identity('main')
     '~/.cache/py-resumable/f58ccb5f55e806673664c8e5c56515d07790df41.csv'
     """
     if argv is None:
-        argv = sys.argv
+        argv = sys.argv[:]
         if len(argv) > 0:
             argv = os.path.abspath(argv[0])
-
+        if extra is not None:
+            argv.append(extra)
     sha1 = hasher("@".join(argv).encode(encoding))
     identity = "{}{}{}".format(prefix, sha1.hexdigest(), suffix)
     return identity

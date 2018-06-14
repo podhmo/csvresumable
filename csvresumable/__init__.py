@@ -9,7 +9,7 @@ from csvresumable.consts import TMP_DIR
 
 def DictReader(f, writename=None, resume=None, key=None, dir=TMP_DIR, *args, **kwargs):
     reader = csv.DictReader(f, *args, **kwargs)
-    recorder = Recorder(name=writename, dir=dir)
+    recorder = Recorder(name=writename, dir=dir, extra=getattr(f, "name", None))
     return _DictReaderWrapper(reader, recorder=recorder, resume=resume, key=key)
 
 

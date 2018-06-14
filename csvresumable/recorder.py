@@ -13,8 +13,8 @@ logger = get_logger(__name__)
 class Recorder:
     writer_factory = csv.writer
 
-    def __init__(self, *, name=None, dir=TMP_DIR, register=atexit.register):
-        self.name = name or get_identity()
+    def __init__(self, *, name=None, extra=None, dir=TMP_DIR, register=atexit.register):
+        self.name = name or get_identity(extra=extra)
         self.register = register
         self.dir = dir
         self._wf = None
