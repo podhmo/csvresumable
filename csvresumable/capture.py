@@ -51,6 +51,7 @@ def capture(
                 with open(name) as rf:
                     for line in rf:
                         mwf.write(line)
+                mwf.flush()
                 logger.debug("replay end")
 
             if redirect_stdout:
