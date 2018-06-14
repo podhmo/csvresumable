@@ -19,7 +19,7 @@ def get_identity(
     if argv is None:
         argv = sys.argv[:]
         if len(argv) > 0:
-            argv = os.path.abspath(argv[0])
+            argv[0] = os.path.abspath(argv[0])
         if extra is not None:
             argv.append(extra)
     sha1 = hasher("@".join(argv).encode(encoding))
