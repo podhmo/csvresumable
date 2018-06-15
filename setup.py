@@ -23,7 +23,7 @@ testing_extras = tests_require + []
 
 setup(
     name='csvresumable',
-    version='0.0.0',
+    version='0.0.1',
     description='adding tiny resume function, for csv reading iterator',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
@@ -33,7 +33,8 @@ setup(
     keywords='csv, resume',
     author="podhmo",
     author_email="ababjam61+pypi@gmail.com",
-    url="https://github.com/podhmo/cssresumable",
+    url="https://github.com/podhmo/csvresumable",
+    long_description_content_type='text/markdown',
     packages=find_packages(exclude=["csvresumable.tests"]),
     include_package_data=True,
     zip_safe=False,
