@@ -6,7 +6,7 @@ import sys
 from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 try:
-    with open(os.path.join(here, 'README.rst')) as f:
+    with open(os.path.join(here, 'README.md')) as f:
         README = f.read()
     with open(os.path.join(here, 'CHANGES.txt')) as f:
         CHANGES = f.read()
@@ -23,7 +23,7 @@ testing_extras = tests_require + []
 
 setup(
     name='csvresumable',
-    version='0.0.1',
+    version='0.0.2',
     description='adding tiny resume function, for csv reading iterator',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
