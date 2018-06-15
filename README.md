@@ -51,7 +51,7 @@ finished
 
 ```
 
-or setting with `resume` option (run this script, such as `python 01main.py --resume --seed=1`)
+or setting with `resume` option (run this script, such as `python 01main.py --resume`)
 
 ```diff
 --- 00main.py	2018-06-16 04:19:51.573578443 +0900
