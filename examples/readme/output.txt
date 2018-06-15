@@ -1,0 +1,9 @@
+python 00main.py
+name
+foo
+bar
+RESUME=1 python 00main.py
+boo
+RESUME=1 python 00main.py
+RESUME=1 python 00main.py
+RESUME=1 python 00main.py

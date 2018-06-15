@@ -15,7 +15,7 @@ except IOError:
 
 install_requires = []
 
-docs_extras = []
+docs_extras = ["kamidana"]
 
 tests_require = []
 
@@ -23,17 +23,17 @@ testing_extras = tests_require + []
 
 setup(
     name='csvresumable',
-    version='0.0',
-    description='-',
+    version='0.0.0',
+    description='adding tiny resume function, for csv reading iterator',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: Implementation :: CPython",
     ],
-    keywords='',
-    author="",
-    author_email="",
-    url="",
+    keywords='csv, resume',
+    author="podhmo",
+    author_email="ababjam61+pypi@gmail.com",
+    url="https://github.com/podhmo/cssresumable",
     packages=find_packages(exclude=["csvresumable.tests"]),
     include_package_data=True,
     zip_safe=False,

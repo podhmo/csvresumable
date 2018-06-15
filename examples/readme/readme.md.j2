@@ -1,0 +1,32 @@
+# cssresumable
+
+Adding tiny resume function for your csv reading iterator.
+
+## examples
+
+00main.py
+
+```python
+{{"00main.py"|read_from_file}}
+```
+
+resuming until success.
+
+```console
+{{"make 00"|read_from_command}}
+```
+
+or setting with `resume` option (run this script, such as `python 01main.py --resume --seed=1`)
+
+```diff
+{{"diff -u 00main.py 01main.py"|read_from_command(check=False)}}
+```
+
+### with multi files
+
+
+
+## more
+
+- [examples/01multisource](examples/01multisource)
+

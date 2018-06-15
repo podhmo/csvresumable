@@ -7,5 +7,10 @@ define runT
 
 endef
 
-readme:
+runall:
 	$(foreach d,${SUBDIRS},$(call runT,$(d)))
+
+readme:
+	$(MAKE) -C examples/readme
+	cp examples/readme/readme.md README.md
+.PHONY: readme
