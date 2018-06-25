@@ -1,3 +1,8 @@
 default:
-	python main.py || echo ""
-	RESUME=1 python main.py || echo ""
+	python main.py
+	python main.py --resume
+	python main.py --resume
+	python main.py
+
+clean:
+	rm -f .resumable*

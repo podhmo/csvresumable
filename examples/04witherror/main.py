@@ -1,16 +1,17 @@
-from csvresumable import DictReader, capture
-import json
+from csvresumable import DictReader
 import logging
-import sys
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--resume", action="store_true")
+parser.add_argument("file", nargs="?", default="./data.csv")
+args = parser.parse_args()
+# logging.basicConfig(level=logging.DEBUG)
 
-logging.basicConfig(level=logging.DEBUG)
-sys.stderr.write("----------------------------------------\n")
-with capture():
-    with open("data.csv") as rf:
-        r = DictReader(rf)
-        for i, row in enumerate(r):
-            print("start", row["id"])
-            if i == 2:
-                raise Exception("hmm")
-            print(json.dumps(row))
-            print("end", row["id"])
+import sys; sys.stderr.write("----------------------------------------\n")
+with open(args.file, "r") as rf:
+    r = DictReader(rf, resume=args.resume)
+
+    for i, row in enumerate(r):
+        print(row)
+        if i == 2:
+            break
