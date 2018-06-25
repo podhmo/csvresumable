@@ -14,16 +14,20 @@ def get_identity(
 ):
     """
     get_identity('main')
-    '~/.cache/py-resumable/f58ccb5f55e806673664c8e5c56515d07790df41.csv'
+    '~/.cache/py-resumable/b28b7af69320201d1cf206ebf28373980add1451.csv'
     """
     if argv is None:
         argv = sys.argv[:]
+    if not isinstance(argv, (str, bytes)):
         if len(argv) > 0:
             argv[0] = os.path.abspath(argv[0])
         if extra is not None:
-            argv.append(extra)
-    sha1 = hasher("@".join(argv).encode(encoding))
-    identity = "{}{}{}".format(prefix, sha1.hexdigest(), suffix)
+            argv = [argv[0], extra]
+        argv = "@".join(argv)
+    if not isinstance(argv, bytes):
+        argv = argv.encode(encoding)
+    hash_value = hasher(argv)
+    identity = "{}{}{}".format(prefix, hash_value.hexdigest(), suffix)
     return identity
 
 
